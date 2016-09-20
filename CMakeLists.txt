@@ -32,3 +32,6 @@ SEMMacroBuildCLI(
 
 target_compile_features(itkImageFormatsLib PUBLIC cxx_generalized_initializers)
 target_compile_features(itkImageFormats PUBLIC cxx_generalized_initializers)
+
+add_executable(testIO testIO.cxx)
+target_link_libraries(testIO ${ITK_LIBRARIES})
