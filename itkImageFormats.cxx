@@ -25,7 +25,8 @@ void CreateAndSaveImage(std::string filename,
                         const char* pixelTypeName
                        )
 {
-  std::string ioName;
+  std::string ioReaderName;
+  std::string ioWriterName;
   try
   {
     typedef itk::Image<PixelType, Dimension> ImageType;
@@ -42,10 +43,16 @@ void CreateAndSaveImage(std::string filename,
     writer->SetFileName(filename);
     writer->SetInput(image);
     writer->Update();
+    ioWriterName = writer->GetImageIO()->GetNameOfClass();
+    itk::ImageIOBase::Pointer io = itk::ImageIOFactory::CreateImageIO(filename.c_str(), itk::ImageIOFactory::ReadMode);
+    if (io.IsNull())
+    {
+      std::cout << filename << ", " << ioWriterName << ", " << ioReaderName << ", " << Dimension << ", " << componentTypeName << ", " << pixelTypeName << ", No reader" << std::endl;
+      return;
+    }
+    ioReaderName = io->GetNameOfClass();
     typedef itk::ImageFileReader<ImageType> ReaderType;
     typename ReaderType::Pointer reader = ReaderType::New();
-    itk::ImageIOBase *io = itk::ImageIOFactory::CreateImageIO(filename.c_str(), itk::ImageIOFactory::ReadMode);
-    ioName = io->GetNameOfClass();
     reader->SetFileName(filename);
     reader->Update();
     typedef itk::ImageRegionIterator<ImageType> IteratorType;
@@ -55,7 +62,7 @@ void CreateAndSaveImage(std::string filename,
     {
       if(it.Get() != it_reader.Get())
       {
-        std::cout<<filename<< ", " << ioName << ", " << Dimension <<", "<< componentTypeName << ", "<< pixelTypeName << ", Failure"<<std::endl;
+        std::cout << filename << ", " << ioWriterName << ", " << ioReaderName << ", " << Dimension << ", " << componentTypeName << ", " << pixelTypeName << ", No reader" << std::endl;
         return;
       }
     }
@@ -64,15 +71,15 @@ void CreateAndSaveImage(std::string filename,
   {
     std::string err_string = err.GetDescription();
     std::replace(err_string.begin(), err_string.end(), '\n', ' ');
-    std::cout<<filename<< ", " << ioName << ", " << Dimension <<", "<< componentTypeName << ", "<< pixelTypeName << ", " << err_string <<std::endl;
+    std::cout << filename << ", " << ", " << ioWriterName << ", " << ioReaderName << ", " << Dimension << ", " << componentTypeName << ", " << pixelTypeName << ", " << err_string << std::endl;
     return;
   }
   catch(...)
   {
-    std::cout<<filename<< ", " << ioName << ", " << Dimension <<", "<< componentTypeName << ", "<< pixelTypeName << ", Other Exception"<<std::endl;
+    std::cout << filename << ", " << ioWriterName << ", " << ioReaderName << ", " << Dimension << ", " << componentTypeName << ", " << pixelTypeName << ", Other Exception" << std::endl;
     return;
   }
-  std::cout<<filename<< ", " << ioName << ", " << Dimension <<", "<< componentTypeName << ", "<< pixelTypeName << ", Success"<<std::endl;
+  std::cout << filename << ", " << ioWriterName << ", " << ioReaderName << ", " << Dimension << ", " << componentTypeName << ", " << pixelTypeName << ", Success" << std::endl;
 }
 
 template<typename PixelType, unsigned int Dimension>
@@ -81,7 +88,8 @@ void CreateAndSaveImageScalars(std::string filename,
                                const char* pixelTypeName
                               )
 {
-  std::string ioName;
+  std::string ioReaderName;
+  std::string ioWriterName;
   try
   {
     typedef itk::Image<PixelType, Dimension> ImageType;
@@ -97,8 +105,14 @@ void CreateAndSaveImageScalars(std::string filename,
     writer->SetFileName(filename);
     writer->SetInput(image);
     writer->Update();
-    itk::ImageIOBase *io = itk::ImageIOFactory::CreateImageIO(filename.c_str(), itk::ImageIOFactory::ReadMode);
-    ioName = io->GetNameOfClass();
+    ioWriterName = writer->GetImageIO()->GetNameOfClass();
+    itk::ImageIOBase::Pointer io = itk::ImageIOFactory::CreateImageIO(filename.c_str(), itk::ImageIOFactory::ReadMode);
+    if (io.IsNull())
+    {
+      std::cout << filename << ", " << ioWriterName << ", " << ioReaderName << ", " << Dimension << ", " << componentTypeName << ", " << pixelTypeName << ", No reader" << std::endl;
+      return;
+    }
+    ioReaderName = io->GetNameOfClass();
     typedef itk::ImageFileReader<ImageType> ReaderType;
     typename ReaderType::Pointer reader = ReaderType::New();
     reader->SetFileName(filename);
@@ -113,7 +127,7 @@ void CreateAndSaveImageScalars(std::string filename,
                         compare->GetNumberOfPixelsWithDifferences();
     if(numberOfPixelsWithDifferences > 0)
     {
-      std::cout<<filename<< ", " << ioName << ", " << Dimension <<", "<< componentTypeName << ", "<< pixelTypeName << ", Failure"<<std::endl;
+      std::cout << filename << ", " << ioWriterName << ", " << ioReaderName << ", " << Dimension << ", " << componentTypeName << ", " << pixelTypeName << ", Failure" << std::endl;
       return;
     }
   }
@@ -121,15 +135,15 @@ void CreateAndSaveImageScalars(std::string filename,
   {
     std::string err_string = err.GetDescription();
     std::replace(err_string.begin(), err_string.end(), '\n', ' ');
-    std::cout<<filename<< ", " << ioName << ", " << Dimension <<", "<< componentTypeName << ", "<< pixelTypeName << ", " << err_string <<std::endl;
+    std::cout<<filename<< ", " << ", " << ioWriterName << ", " << ioReaderName << ", " << Dimension <<", "<< componentTypeName << ", "<< pixelTypeName << ", " << err_string <<std::endl;
     return;
   }
   catch(...)
   {
-    std::cout<<filename<< ", " << ioName << ", " << Dimension <<", "<< componentTypeName << ", "<< pixelTypeName << ", Other Exception"<<std::endl;
+    std::cout << filename << ", " << ioWriterName << ", " << ioReaderName << ", " << Dimension << ", " << componentTypeName << ", " << pixelTypeName << ", Other Exception" << std::endl;
     return;
   }
-  std::cout<<filename<< ", " << ioName << ", " << Dimension <<", "<< componentTypeName << ", "<< pixelTypeName << ", Success"<<std::endl;
+  std::cout << filename << ", " << ioWriterName << ", " << ioReaderName << ", " << Dimension << ", " << componentTypeName << ", " << pixelTypeName << ", Success" << std::endl;
 }
 
 
