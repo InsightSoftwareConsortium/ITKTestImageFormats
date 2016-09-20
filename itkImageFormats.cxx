@@ -286,18 +286,18 @@ void SelectDimension(const char* extension,
     {
       SelectComponentType<3>(filename.c_str(), pixel, components);
     }
-//    else if(dim[ii] ==4)
-//    {
-//      SelectComponentType<4>(filename.c_str(), pixel, components);
-//    }
-//    else if(dim[ii]==5)
-//    {
-//      SelectComponentType<5>(filename.c_str(), pixel, components);
-//    }
-//    else if(dim[ii] == 6)
-//    {
-//      SelectComponentType<6>(filename.c_str(), pixel, components);
-//    }
+    else if(dim[ii] ==4)
+    {
+      SelectComponentType<4>(filename.c_str(), pixel, components);
+    }
+    else if(dim[ii]==5)
+    {
+      SelectComponentType<5>(filename.c_str(), pixel, components);
+    }
+    else if(dim[ii] == 6)
+    {
+      SelectComponentType<6>(filename.c_str(), pixel, components);
+    }
   }
 }
 
