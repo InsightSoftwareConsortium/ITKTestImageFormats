@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<executable>
+  <category>ImageIO</category>
+  <title>Test ITK ImageIO</title>
+  <description>Test ITK Image IO by creating images of all possible types, write them on disk, read them back, and compare the content</description>
+  <license>Apache 2.0</license>
+  <contributor>Francois Budin (Kitware)</contributor>
+  <acknowledgements></acknowledgements>
+  <parameters>
+    <label>Parameters</label>
+    <description>Skip</description>
+    <string-vector>
+      <name>skipIOs</name>
+      <label>IOs to skip</label>
+      <longflag>skipIOs</longflag>
+      <description>IOs to skip.</description>
+    </string-vector>
+    <string-vector>
+      <name>skipExtensions</name>
+      <label>Extensions to skip</label>
+      <longflag>skipExtensions</longflag>
+      <description>Extensions to skip.</description>
+    </string-vector>
+    <integer-vector>
+      <name>skipDimensions</name>
+      <label>Dimensions to skip</label>
+      <longflag>skipDimensions</longflag>
+      <description>Dimensions to skip.</description>
+    </integer-vector>
+  </parameters>
+</executable>
