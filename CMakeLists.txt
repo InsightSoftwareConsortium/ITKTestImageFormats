@@ -1,8 +1,27 @@
 cmake_minimum_required(VERSION 3.5)
+project(itkImageFormats)
+
+set(ListComponents}
+    ITKCommon
+
+          ITKIOImageBase
+      ITKIOBMP
+      ITKIOJPEG
+      ITKIONRRD
+      ITKIOTIFF
+      ITKIOMeta
+      ITKIOPNG
+      ITKIONIFTI
+      ITKIOGIPL
+    
+    ITKImageCompare
+    ITKImageIntensity
+
+)
 
 find_package(SlicerExecutionModel REQUIRED)
 include(${SlicerExecutionModel_USE_FILE})
-find_package(ITK REQUIRED)
+find_package(ITK COMPONENTS ${ListComponents} REQUIRED)
 include(${ITK_USE_FILE})
 
 SEMMacroBuildCLI(
