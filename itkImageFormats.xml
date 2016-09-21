@@ -8,7 +8,7 @@
   <acknowledgements></acknowledgements>
   <parameters>
     <label>Parameters</label>
-    <description>Skip</description>
+    <description>Parameters</description>
     <string-vector>
       <name>skipIOs</name>
       <label>IOs to skip</label>
@@ -21,11 +21,23 @@
       <longflag>skipExtensions</longflag>
       <description>Extensions to skip.</description>
     </string-vector>
+    <string-vector>
+      <name>onlyExtensions</name>
+      <label>Only extensions to use</label>
+      <longflag>onlyExtensions</longflag>
+      <description>Only extensions to use.</description>
+    </string-vector>
     <integer-vector>
       <name>skipDimensions</name>
       <label>Dimensions to skip</label>
       <longflag>skipDimensions</longflag>
       <description>Dimensions to skip.</description>
+    </integer-vector>
+    <integer-vector>
+      <name>onlyDimensions</name>
+      <label>Only dimensions to use</label>
+      <longflag>onlyDimensions</longflag>
+      <description>Only dimensions to use.</description>
     </integer-vector>
   </parameters>
 </executable>
