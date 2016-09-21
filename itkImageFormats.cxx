@@ -27,6 +27,7 @@ void CreateAndSaveImage(std::string filename,
 {
   std::string ioReaderName;
   std::string ioWriterName;
+      std::cout << filename << ", " << ioWriterName << ", " << ioReaderName << ", " << Dimension << ", " << componentTypeName << ", " << pixelTypeName << ", before" << std::endl;
   try
   {
     typedef itk::Image<PixelType, Dimension> ImageType;
@@ -90,6 +91,7 @@ void CreateAndSaveImageScalars(std::string filename,
 {
   std::string ioReaderName;
   std::string ioWriterName;
+      std::cout << filename << ", " << ioWriterName << ", " << ioReaderName << ", " << Dimension << ", " << componentTypeName << ", " << pixelTypeName << ", before" << std::endl;
   try
   {
     typedef itk::Image<PixelType, Dimension> ImageType;
@@ -105,6 +107,7 @@ void CreateAndSaveImageScalars(std::string filename,
     writer->SetFileName(filename);
     writer->SetInput(image);
     writer->Update();
+std::cout<<"after writer update()"<<std::endl;
     ioWriterName = writer->GetImageIO()->GetNameOfClass();
     itk::ImageIOBase::Pointer io = itk::ImageIOFactory::CreateImageIO(filename.c_str(), itk::ImageIOFactory::ReadMode);
     if (io.IsNull())
@@ -113,16 +116,19 @@ void CreateAndSaveImageScalars(std::string filename,
       return;
     }
     ioReaderName = io->GetNameOfClass();
+std::cout<<"after io getnameofclass()"<<std::endl;
     typedef itk::ImageFileReader<ImageType> ReaderType;
     typename ReaderType::Pointer reader = ReaderType::New();
     reader->SetFileName(filename);
     reader->Update();
+std::cout<<"after reader update()"<<std::endl;
     typedef itk::Testing::ComparisonImageFilter< ImageType, ImageType > CompareType;
     typename CompareType::Pointer compare = CompareType::New();
     compare->SetValidInput(image);
     compare->SetTestInput(reader->GetOutput());
     compare->SetToleranceRadius(0);
     compare->Update();
+std::cout<<"after compare update()"<<std::endl;
     const unsigned long numberOfPixelsWithDifferences =
                         compare->GetNumberOfPixelsWithDifferences();
     if(numberOfPixelsWithDifferences > 0)
@@ -159,18 +165,18 @@ void SelectPixelType(const char* filename,
     {
       CreateAndSaveImageScalars<ComponentType, Dimension>(filename, componentTypeName, "Scalar");
     }
-//    else if(pixel[ii]==itk::ImageIOBase::IOPixelType::RGBA)
-//    {
-//      CreateAndSaveImage<itk::RGBAPixel<ComponentType>, Dimension>(filename, componentTypeName, "RGBA");
-//    }
-//    else if(pixel[ii]==itk::ImageIOBase::IOPixelType::RGB)
-//    {
-//      CreateAndSaveImage<itk::RGBPixel<ComponentType>, Dimension>(filename, componentTypeName, "RGB");
-//    }
-//    else if(pixel[ii]==itk::ImageIOBase::IOPixelType::OFFSET)
-//    {
-//      CreateAndSaveImage<itk::Offset<3>, Dimension>(filename, componentTypeName, "Offset");
-//    }
+    else if(pixel[ii]==itk::ImageIOBase::IOPixelType::RGBA)
+    {
+      CreateAndSaveImage<itk::RGBAPixel<ComponentType>, Dimension>(filename, componentTypeName, "RGBA");
+    }
+    else if(pixel[ii]==itk::ImageIOBase::IOPixelType::RGB)
+    {
+      CreateAndSaveImage<itk::RGBPixel<ComponentType>, Dimension>(filename, componentTypeName, "RGB");
+    }
+    else if(pixel[ii]==itk::ImageIOBase::IOPixelType::OFFSET)
+    {
+      CreateAndSaveImage<itk::Offset<3>, Dimension>(filename, componentTypeName, "Offset");
+    }
 //    else if(pixel[ii]==itk::ImageIOBase::IOPixelType::VECTOR)
 //    {
 //      CreateAndSaveImage<itk::Vector<ComponentType,3>, Dimension>(filename, componentTypeName, "Vector");
@@ -218,39 +224,39 @@ void SelectComponentType(const char* filename,
 {
   for( size_t ii = 0 ; ii < components.size() ; ii++)
   {
-    if(components[ii]==itk::ImageIOBase::IOComponentType::UCHAR)
-    {
-      SelectPixelType<unsigned char, Dimension>(filename, pixel, "uchar");
-    }
-    else if(components[ii]==itk::ImageIOBase::IOComponentType::CHAR)
-    {
-      SelectPixelType<char, Dimension>(filename, pixel, "char");
-    }
-    else if(components[ii]==itk::ImageIOBase::IOComponentType::SHORT)
-    {
-      SelectPixelType<short, Dimension>(filename, pixel, "short");
-    }
-    else if(components[ii]==itk::ImageIOBase::IOComponentType::USHORT)
-    {
-      SelectPixelType<unsigned short, Dimension>(filename, pixel, "ushort");
-    }
-    else if(components[ii]==itk::ImageIOBase::IOComponentType::UINT)
-    {
-      SelectPixelType<unsigned int, Dimension>(filename, pixel, "uint");
-    }
-    else if(components[ii]==itk::ImageIOBase::IOComponentType::INT)
-    {
-      SelectPixelType<int, Dimension>(filename, pixel, "int");
-    }
-    else if(components[ii]==itk::ImageIOBase::IOComponentType::ULONG)
-    {
-      SelectPixelType<unsigned long, Dimension>(filename, pixel, "ulong");
-    }
-    else if(components[ii]==itk::ImageIOBase::IOComponentType::LONG)
-    {
-      SelectPixelType<long, Dimension>(filename, pixel, "long");
-    }
-    else if(components[ii]==itk::ImageIOBase::IOComponentType::FLOAT)
+//    if(components[ii]==itk::ImageIOBase::IOComponentType::UCHAR)
+//    {
+//      SelectPixelType<unsigned char, Dimension>(filename, pixel, "uchar");
+//    }
+//    else if(components[ii]==itk::ImageIOBase::IOComponentType::CHAR)
+//    {
+//      SelectPixelType<char, Dimension>(filename, pixel, "char");
+//    }
+//    else if(components[ii]==itk::ImageIOBase::IOComponentType::SHORT)
+//    {
+//      SelectPixelType<short, Dimension>(filename, pixel, "short");
+//    }
+//    else if(components[ii]==itk::ImageIOBase::IOComponentType::USHORT)
+//    {
+//      SelectPixelType<unsigned short, Dimension>(filename, pixel, "ushort");
+//    }
+//    else if(components[ii]==itk::ImageIOBase::IOComponentType::UINT)
+//    {
+//      SelectPixelType<unsigned int, Dimension>(filename, pixel, "uint");
+//    }
+//    else if(components[ii]==itk::ImageIOBase::IOComponentType::INT)
+//    {
+//      SelectPixelType<int, Dimension>(filename, pixel, "int");
+//    }
+//    else if(components[ii]==itk::ImageIOBase::IOComponentType::ULONG)
+//    {
+//      SelectPixelType<unsigned long, Dimension>(filename, pixel, "ulong");
+//    }
+//    else if(components[ii]==itk::ImageIOBase::IOComponentType::LONG)
+//    {
+//      SelectPixelType<long, Dimension>(filename, pixel, "long");
+//    }
+    if(components[ii]==itk::ImageIOBase::IOComponentType::FLOAT)
     {
       SelectPixelType<float, Dimension>(filename, pixel, "float");
     }
@@ -266,7 +272,7 @@ void SelectComponentType(const char* filename,
 }
 
 void SelectDimension(const char* extension,
-                     std::vector<unsigned int> dim,
+                     std::vector<int> dim,
                      std::vector<itk::ImageIOBase::IOPixelType> pixel,
                      std::vector<itk::ImageIOBase::IOComponentType> components
                     )
@@ -278,23 +284,23 @@ void SelectDimension(const char* extension,
     {
       SelectComponentType<1>(filename.c_str(), pixel, components);
     }
-    if( dim[ii] == 2)
-    {
-      SelectComponentType<2>(filename.c_str(), pixel, components);
-    }
-    else if(dim[ii] == 3)
-    {
-      SelectComponentType<3>(filename.c_str(), pixel, components);
-    }
-    else if(dim[ii] ==4)
-    {
-      SelectComponentType<4>(filename.c_str(), pixel, components);
-    }
-    else if(dim[ii]==5)
-    {
-      SelectComponentType<5>(filename.c_str(), pixel, components);
-    }
-    else if(dim[ii] == 6)
+//    if( dim[ii] == 2)
+//    {
+//      SelectComponentType<2>(filename.c_str(), pixel, components);
+//    }
+//    else if(dim[ii] == 3)
+//    {
+//      SelectComponentType<3>(filename.c_str(), pixel, components);
+//    }
+//    else if(dim[ii] ==4)
+//    {
+//      SelectComponentType<4>(filename.c_str(), pixel, components);
+//    }
+//    else if(dim[ii]==5)
+//    {
+//      SelectComponentType<5>(filename.c_str(), pixel, components);
+//    }
+    if(dim[ii] == 6)
     {
       SelectComponentType<6>(filename.c_str(), pixel, components);
     }
@@ -304,7 +310,25 @@ void SelectDimension(const char* extension,
 int main(int argc, char* argv[])
 {
   PARSE_ARGS;
-  std::vector<unsigned int> dim = {1, 2, 3, 4, 5, 6};
+  if(!onlyExtensions.empty() && !skipExtensions.empty())
+  {
+    std::cerr << "You can specify only one of the two following options: onlyExtensions, skipExtensions" << std::endl;
+    return 1;
+  }
+  if(!onlyDimensions.empty() && !skipDimensions.empty())
+  {
+    std::cerr << "You can specify only one of the two following options: onlyDimensions, skipDimensions" << std::endl;
+    return 1;
+  }
+  std::vector<int> dim;
+  if(onlyDimensions.empty() )
+  {
+    dim = {1, 2, 3, 4, 5, 6};
+  }
+  else
+  {
+    dim = onlyDimensions;
+  }
   for(size_t ii = 0 ; ii < skipDimensions.size(); ii++)
   {
     if( std::find(dim.begin(), dim.end(), skipDimensions[ii]) != dim.end())
@@ -329,7 +353,17 @@ int main(int argc, char* argv[])
         {
           if( std::find(skipExtensions.begin(), skipExtensions.end(), currentExtensions[ii]) ==  skipExtensions.end())
           {
-            listExtensions.push_back(currentExtensions[ii]);
+            if( onlyExtensions.empty() )
+            {
+              listExtensions.push_back(currentExtensions[ii]);
+            }
+            else
+            {
+              if( std::find(onlyExtensions.begin(), onlyExtensions.end(), currentExtensions[ii]) !=  onlyExtensions.end())
+              {
+                listExtensions.push_back(currentExtensions[ii]);
+              }
+            }
           }
         }
       }
@@ -339,6 +373,12 @@ int main(int argc, char* argv[])
   {
     std::cerr << "  There are no registered IO factories." << std::endl;
     std::cerr << "  Please visit https://www.itk.org/Wiki/ITK/FAQ#NoFactoryException to diagnose the problem." << std::endl;
+    return 1;
+  }
+  if(listExtensions.empty())
+  {
+    std::cerr<<"No supported extension found"<<std::endl;
+    return 1;
   }
   std::cout<< "List extensions: ";
   for( size_t ii = 0 ; ii < listExtensions.size(); ii++)
