@@ -1,4 +1,6 @@
-TestITKImageFormats
+===================
+ITKTestImageFormats
+===================
 
 About
 -----

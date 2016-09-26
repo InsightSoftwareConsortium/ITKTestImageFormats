@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(itkImageFormats)
+project(ITKTestImageFormats)
 
 
 find_package(SlicerExecutionModel REQUIRED)
@@ -8,10 +8,10 @@ find_package(ITK REQUIRED)
 include(${ITK_USE_FILE})
 
 SEMMacroBuildCLI(
-  NAME itkImageFormats
+  NAME ITKTestImageFormats
   TARGET_LIBRARIES
     ${ITK_LIBRARIES}
   )
 
-target_compile_features(itkImageFormatsLib PUBLIC cxx_generalized_initializers)
-target_compile_features(itkImageFormats PUBLIC cxx_generalized_initializers)
+target_compile_features(ITKTestImageFormatsLib PUBLIC cxx_generalized_initializers)
+target_compile_features(ITKTestImageFormats PUBLIC cxx_generalized_initializers)
