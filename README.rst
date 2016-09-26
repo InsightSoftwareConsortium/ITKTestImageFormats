@@ -27,39 +27,42 @@ compile and creates a very large executable file.
 Typical Output
 --------------
 
-itk::ImageIOBase::IOPixelType:: UNKNOWNPIXELTYPE: Not tested
-itk::ImageIOBase::IOComponentType::UNKNOWNCOMPONENTTYPE: Not tested
-List extensions: .nia,.nii,.nii.gz,.hdr,.img,.img.gz,.nrrd,.nhdr,.jpg,.JPG,.jpeg,.JPEG,.bmp,.BMP,.tif,.TIF,.tiff,.TIFF,.lsm,.LSM,.tif,.TIF,.tiff,.TIFF,.vtk,.pic,.mha,.mhd,.mrc,.rec,
-Function, Filename, IOName, Dimension, Component, Pixel, Result
-CreateAndSaveImageScalars, test.nia, , , 1, uchar, Scalar, Start
-CreateAndSaveImageScalars, test.nia, NiftiImageIO, , 1, uchar, Scalar, No reader
-CreateAndSaveImage, test.nia, , , 1, uchar, RGBA, Start
-CreateAndSaveImage, test.nia, NiftiImageIO, , 1, uchar, RGBA, No reader
-CreateAndSaveImage, test.nia, , , 1, uchar, RGB, Start
-CreateAndSaveImage, test.nia, NiftiImageIO, , 1, uchar, RGB, No reader
-CreateAndSaveImage, test.nia, , , 1, uchar, Offset, Start
-CreateAndSaveImage, test.nia, , , 1, uchar, Offset, itk::ERROR: NiftiImageIO(0x2a3b180): Can not process this pixel type for writing into nifti
-CreateAndSaveImage, test.nia, , , 1, uchar, Vector, Start
-CreateAndSaveImage, test.nia, NiftiImageIO, , 1, uchar, Vector, No reader
-CreateAndSaveImage, test.nia, , , 1, uchar, CovariantVector, Start
-CreateAndSaveImage, test.nia, , , 1, uchar, CovariantVector, itk::ERROR: NiftiImageIO(0x2a3b180): Can not process this pixel type for writing into nifti
-CreateAndSaveImage, test.nia, , , 1, uchar, SymmetricSecondRankTensor, Start
-CreateAndSaveImage, test.nia, NiftiImageIO, , 1, uchar, SymmetricSecondRankTensor, No reader
-CreateAndSaveImage, test.nia, , , 1, uchar, DiffusionTensor3D, Start
-CreateAndSaveImage, test.nia, NiftiImageIO, , 1, uchar, DiffusionTensor3D, No reader
-CreateAndSaveImage, test.nia, , , 1, uchar, Complex, Start
-CreateAndSaveImage, test.nia, , , 1, uchar, Complex, itk::ERROR: NiftiImageIO(0x2a36780): Only float or double precision complex type supported
-CreateAndSaveImage, test.nia, , , 1, uchar, FixedArray, Start
-CreateAndSaveImage, test.nia, , , 1, uchar, FixedArray, itk::ERROR: NiftiImageIO(0x2a3b180): Can not process this pixel type for writing into nifti
-CreateAndSaveImage, test.nia, , , 1, uchar, Matrix, Start
-CreateAndSaveImage, test.nia, , , 1, uchar, Matrix, itk::ERROR: NiftiImageIO(0x2a3c3e0): Can not process this pixel type for writing into nifti
-CreateAndSaveImage, test.nia, , , 1, uchar, Point, Start
-CreateAndSaveImage, test.nia, , , 1, uchar, Point, itk::ERROR: NiftiImageIO(0x2a3b180): More than one component per pixel not supported
+::
+
+  itk::ImageIOBase::IOPixelType:: UNKNOWNPIXELTYPE: Not tested
+  itk::ImageIOBase::IOComponentType::UNKNOWNCOMPONENTTYPE: Not tested
+  List extensions: .nia,.nii,.nii.gz,.hdr,.img,.img.gz,.nrrd,.nhdr,.jpg,.JPG,.jpeg,.JPEG,.bmp,.BMP,.tif,.TIF,.tiff,.TIFF,.lsm,.LSM,.tif,.TIF,.tiff,.TIFF,.vtk,.pic,.mha,.mhd,.mrc,.rec,
+  Function, Filename, IOName, Dimension, Component, Pixel, Result
+  CreateAndSaveImageScalars, test.nia, , , 1, uchar, Scalar, Start
+  CreateAndSaveImageScalars, test.nia, NiftiImageIO, , 1, uchar, Scalar, No reader
+  CreateAndSaveImage, test.nia, , , 1, uchar, RGBA, Start
+  CreateAndSaveImage, test.nia, NiftiImageIO, , 1, uchar, RGBA, No reader
+  CreateAndSaveImage, test.nia, , , 1, uchar, RGB, Start
+  CreateAndSaveImage, test.nia, NiftiImageIO, , 1, uchar, RGB, No reader
+  CreateAndSaveImage, test.nia, , , 1, uchar, Offset, Start
+  CreateAndSaveImage, test.nia, , , 1, uchar, Offset, itk::ERROR: NiftiImageIO(0x2a3b180): Can not process this pixel type for writing into nifti
+  CreateAndSaveImage, test.nia, , , 1, uchar, Vector, Start
+  CreateAndSaveImage, test.nia, NiftiImageIO, , 1, uchar, Vector, No reader
+  CreateAndSaveImage, test.nia, , , 1, uchar, CovariantVector, Start
+  CreateAndSaveImage, test.nia, , , 1, uchar, CovariantVector, itk::ERROR: NiftiImageIO(0x2a3b180): Can not process this pixel type for writing into nifti
+  CreateAndSaveImage, test.nia, , , 1, uchar, SymmetricSecondRankTensor, Start
+  CreateAndSaveImage, test.nia, NiftiImageIO, , 1, uchar, SymmetricSecondRankTensor, No reader
+  CreateAndSaveImage, test.nia, , , 1, uchar, DiffusionTensor3D, Start
+  CreateAndSaveImage, test.nia, NiftiImageIO, , 1, uchar, DiffusionTensor3D, No reader
+  CreateAndSaveImage, test.nia, , , 1, uchar, Complex, Start
+  CreateAndSaveImage, test.nia, , , 1, uchar, Complex, itk::ERROR: NiftiImageIO(0x2a36780): Only float or double precision complex type supported
+  CreateAndSaveImage, test.nia, , , 1, uchar, FixedArray, Start
+  CreateAndSaveImage, test.nia, , , 1, uchar, FixedArray, itk::ERROR: NiftiImageIO(0x2a3b180): Can not process this pixel type for writing into nifti
+  CreateAndSaveImage, test.nia, , , 1, uchar, Matrix, Start
+  CreateAndSaveImage, test.nia, , , 1, uchar, Matrix, itk::ERROR: NiftiImageIO(0x2a3c3e0): Can not process this pixel type for writing into nifti
+  CreateAndSaveImage, test.nia, , , 1, uchar, Point, Start
+  CreateAndSaveImage, test.nia, , , 1, uchar, Point, itk::ERROR: NiftiImageIO(0x2a3b180): More than one component per pixel not supported
 
 Sucessful reader and writer
 ---------------------------
+::
 
-CreateAndSaveImage, test.nii, NiftiImageIO, NiftiImageIO, 2, uchar, Vector, Success
+  CreateAndSaveImage, test.nii, NiftiImageIO, NiftiImageIO, 2, uchar, Vector, Success
 
 Copyright
 ---------
